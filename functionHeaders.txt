@@ -1,0 +1,127 @@
+%%%%% FUNCTIONS %%%%%
+
+% faircraft.m
+% function to define the mathematical model for a fixed wing aircraft
+function [xdot,y] = faircraft(t,x,delta,Vwe,deltaCGb,aircraft)
+
+% DCM.m
+% function to calculate Direction Cosine Matrix
+function Cbe = DCM(Phi)
+
+% H.m
+% function to calculate H Matrix such that
+function Hmatrix = H(Phi)
+
+% atmosphere.m
+% function to calculate ISA atmosphere model
+function [rho,P,T,a] = atmosphere(h)
+
+% aerodynamics.m
+% function to calculate aerodynamic forces and moments for a fixed wing aircraft 
+function [Fab,Mab] = aerodynamics(V,alpha,beta,alphadot,omegab,deltaaero,qbar,M,deltaCGb,aircraft)
+
+% Cbwmatrix.m
+% function to calculate rotation matrix from relative wind frame to body frame
+function Cbw = Cbwmatrix(alpha,beta)
+
+% propulsion.m
+% function to calculate propulsion system forces and moments
+function [Ftb,Mtb] = propulsion(deltat,deltaCGb,aircraft)
+
+% simulateAircraft.m
+% function to simulate a fixed wing aircraft modeled by faircraft function
+function [t,X,Y] = simulateAircraft(tfinal,x0,delta,Vwe,deltaCGb,aircraft)
+
+% plotAircraftSimulationResults.m
+% function to plot fixed wing aircraft simulation results obtained with function simulateAircraft
+function plotAircraftSimulationResults(t,X,Y,aircraft)
+
+% ftrimRect.m
+% function to be minimized to obtain steady rectilinear flight conditions
+function y = ftrimRect(Xi,V,h,Vvert,deltaCGb,aircraft)
+
+% Hinv.m
+% function to calculate Hinv matrix such that omegab = Hinv(Phi)*Phidot
+function Hinvmatrix = Hinv(Phi)
+
+% trimConditionsRect.m
+% function to calculate steady rectilinear flight for a fixed wing aircraft
+function [theta,gamma,alpha,deltat,ih,deltae,fval,flag] = trimConditionsRect(V,h,Vvert,deltaCGb,aircraft) 
+
+% ftrimTurn.m
+% function to be minimized to obtain steady turn flight conditions
+function y = ftrimTurn(Xi,V,h,Vvert,turnRate,ihTrimRect,deltaCGb,aircraft)
+
+% trimConditionsTurn.m
+% function to calculate steady turn flight for a fixed wing aircraft
+function [phi,theta,gamma,alpha,deltat,ih,deltae,deltaa,deltar,fval,flag] = trimConditionsTurn(V,h,Vvert,turnRate,deltaCGb,aircraft) 
+
+% ftrimPullup.m
+% function to be minimized to obtain steady pull up/pull over flight conditions
+function y = ftrimPullup(Xi,V,h,pitchRate,ihTrimRect,deltaCGb,aircraft)
+
+% trimConditionsPullup.m
+% function to calculate steady rectilinear flight for a fixed wing aircraft
+function [alpha,deltat,ih,deltae,fval,flag] = trimConditionsPullup(V,h,pitchRate,deltaCGb,aircraft) 
+
+% ftrimRoll.m
+% function to be minimized to obtain steady roll flight conditions
+function y = ftrimRoll(Xi,V,h,rollRate,ihTrimRect,deltaCGb,aircraft)
+
+% trimConditionsRoll.m
+% function to calculate steady roll flight for a fixed wing aircraft
+function [theta,alpha,beta,deltat,ih,deltae,deltaa,deltar,fval,flag] = trimConditionsRoll(V,h,rollRate,deltaCGb,aircraft)
+
+% f.m
+% function to define the mathematical model for a fixed wing aircraft
+function y = f(xdot,x,u,h,deltaCGb,aircraft)
+
+% Cbsmatrix.m
+% function to calculate rotation matrix from stability frame to body frame
+function Cbs = Cbsmatrix(alpha)
+
+% linearizeAircraftModel.m
+% function to linearize aircraft model given by
+function [E,A,B,Elon,Alon,Blon,Alonprime,Blonprime,Elat,Alat,Blat,Alatprime,Blatprime,eigLon,eigLat,x0,u0] = linearizeAircraftModel(V,h,deltaCGb,aircraft)
+
+% analyzeAircraftDynamicModes.m
+% function to analyze longitudinal and lateral aircraft dynamic modes
+function aircraft = analyzeAircraftDynamicModes(eigLon,eigLat,aircraft)
+
+%%%%% SCRIPTS %%%%%
+
+% testfaircraft.m
+% script to test faircraft function
+
+% simulateNavionAircraft.m
+% script to simulate Navion aircraft for given initial conditions
+
+% testTrimConditionsRect.m
+% script to test trimConsditionsRect to calculate steady level rectilinear flight conditions for a fixed wing aircraft
+
+% testTrimConditionsTurn.m
+% script to test trimConsditionsTurn to calculate steady turn flight conditions for a fixed wing aircraft
+
+% testTrimConditionsPullup.m
+% script to test trimConditionsPullup to calculate steady pull up/pull over flight conditions for a fixed wing aircraft
+
+% testTrimConditionsRoll.m
+% script to test trimConsditionsRoll to calculate steady roll flight conditions for a fixed wing aircraft
+
+% testLinearizeAircraftModel.m
+% script to test linearizeAircraftModel function to calculate linearized model for a fixed wing aircraft
+
+% simulateNavionAircraftPhugoidMode.m
+% script to simulate Navion aircraft phugoid mode
+
+% simulateNavionAircraftShortPeriodMode.m
+% script to simulate Navion aircraft short period mode
+
+% simulateNavionAircraftRollMode.m
+% script to simulate Navion aircraft roll mode
+
+% simulateNavionAircraftDutchRollMode.m
+% script to simulate Navion aircraft dutch roll mode
+
+% simulateNavionAircraftSpiralMode.m
+% script to simulate Navion aircraft spiral mode
